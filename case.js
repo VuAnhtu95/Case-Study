@@ -3,7 +3,7 @@ function clickstart(){
     var gamee = document.getElementById('gametus');
     var interval;
     var both = 0;
-    var counter = 0
+    var counter = 0;
     var currentBlock = []
     function moveLeft(){
         var left = parseInt(window.getComputedStyle(character).getPropertyValue('left'));
@@ -13,7 +13,7 @@ function clickstart(){
     }
     function moveRight() {
         var left = parseInt(window.getComputedStyle(character).getPropertyValue('left'));
-        if(left<380){
+        if(left<680){
             character.style.left = left + 5 + "px";
         }
 
@@ -49,9 +49,8 @@ function clickstart(){
             hole.setAttribute("id","hole"+counter);
             block.style.top = blocklasttop + 100 + "px"
             hole.style.top = holelasttop + 100 + "px"
-            var random = Math.floor(Math.random() * 360);
+            var random = Math.floor(Math.random() * 660);
             hole.style.left = random + "px";
-
             gamee.appendChild(block)
             gamee.appendChild(hole)
             currentBlock.push(counter)
@@ -61,7 +60,7 @@ function clickstart(){
         var characterLeft = parseInt(window.getComputedStyle(character).getPropertyValue('left'));
         var drop = 0
         if (characterTop<=0){
-            alert("Mày ngu vãi l thua rồi nhé");
+            alert("Tắt unikey rồi chơi lại nhé");
             clearInterval(blocks);
             location.reload();
         }
@@ -72,29 +71,34 @@ function clickstart(){
             let iblocktop = parseFloat(window.getComputedStyle(iblock).getPropertyValue('top'));
             let iholeleft = parseFloat(window.getComputedStyle(ihole).getPropertyValue('left'));
             if((counter-5) < 10){
-                iblock.style.top = iblocktop - 0.3 + "px"
-                ihole.style.top = iblocktop - 0.3 + "px"
-            }
-            else if ((counter-5) >= 10 && (counter-5)<20){
-                iblock.style.top = iblocktop - 0.4 + "px"
-                ihole.style.top = iblocktop - 0.4 + "px"
-            }
-            else if ((counter-5) >= 20 && (counter-5)<30){
                 iblock.style.top = iblocktop - 0.5 + "px"
                 ihole.style.top = iblocktop - 0.5 + "px"
             }
-            else if ((counter-5) >= 30 && (counter-5)<40){
+            else if ((counter-5) >= 10 && (counter-5)<20){
                 iblock.style.top = iblocktop - 0.6 + "px"
                 ihole.style.top = iblocktop - 0.6 + "px"
             }
-            else if ((counter-5) >= 40 && (counter-5)<50){
+            else if ((counter-5) >= 20 && (counter-5)<30){
                 iblock.style.top = iblocktop - 0.7 + "px"
                 ihole.style.top = iblocktop - 0.7 + "px"
             }
-            if (iblocktop < - 20){
-                currentBlock.shift();
-                iblock.remove()
-                ihole.remove()
+            else if ((counter-5) >= 30 && (counter-5)<40){
+                iblock.style.top = iblocktop - 0.8 + "px"
+                ihole.style.top = iblocktop - 0.8 + "px"
+            }
+            else if ((counter-5) >= 40 && (counter-5)<50){
+                iblock.style.top = iblocktop - 0.9 + "px"
+                ihole.style.top = iblocktop - 0.9 + "px"
+            }
+            else if((counter-5)==50){
+                alert("Bạn thắng rồi đấy")
+                window.location.reload()
+            }
+            // biến mất div block nếu top < 10
+            if (iblocktop < 10){
+                currentBlock.shift(); //cắt khỏi mảng
+                iblock.remove() // xóa div block
+                ihole.remove() // xóa div hole
             }
             if (iblocktop-20<characterTop && iblocktop>characterTop){
                 drop++;
@@ -106,11 +110,12 @@ function clickstart(){
                 if (characterTop<480){
                     character.style.top = characterTop + 2 +"px"
                 }
-            } else{
+            }else {
                 character.style.top = characterTop -0.5 +"px"
             }
-            document.getElementById('yourpoint').innerText = "Điểm của bạn là " + (counter-5)
         }
+
+        document.getElementById('yourpoint').innerText = "Điểm của bạn là " + (counter-5)
     },1)
 }
 function huongdan(){
